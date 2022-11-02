@@ -1,0 +1,9 @@
+.img {
+    --avatar-size : var(--object-small);
+}
+
+.img {
+    border-radius: 50%;
+    width: var(--avatar-size);
+    height: var(--avatar-size);
+}

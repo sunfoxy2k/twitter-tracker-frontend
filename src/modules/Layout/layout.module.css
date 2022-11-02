@@ -1,0 +1,25 @@
+.container {
+    background-color: var(--background-color);
+}
+
+.header,
+.footer__menu {
+    display: none;
+}
+
+.main {
+    min-height: 80vh;
+}
+
+/* mobile : 32em */
+@media only screen and (max-width: 32em) {
+    .footer__menu {
+        display: block;
+    }
+}
+
+@media only screen and (min-width: 32em) {
+    .header {
+        display: block;
+    }
+}

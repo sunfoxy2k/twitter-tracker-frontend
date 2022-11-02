@@ -1,0 +1,10 @@
+.container {
+    min-height: 20em;
+}
+
+.container {
+    padding: var(--spacing-large);
+    background-color: var(--surface-color);
+    color: var(--on-surface-color);
+    border-radius: var(--spacing-large);
+}

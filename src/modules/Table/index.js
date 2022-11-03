@@ -1,10 +1,11 @@
 
 import Avatar from '../UI_Component/Avatar'
 import TableStyle from './table.module.css'
+import { formatDuration } from './time';
 
 export const TrackingTable = ({ tracking_data, }) => {
 
-    const  headers = ["", "Twitter User", "Number of Following", "Remove Track"];
+    const  headers = ["", "Twitter User","Number of Following","lastUpdateTime", "addedTime" ,""];
 
     return (
         <table className={TableStyle.table} >
@@ -20,14 +21,28 @@ export const TrackingTable = ({ tracking_data, }) => {
     )
 }
 
-const TrackingUserItem = ({ user_name, pictureProfileUrl, total_following }) => {
+const UntrackButton = ({user_name}) => {
+    const onClick = () => {
+        if (confirm (`Do you want to untrack user "${user_name}"`) == true) {
+            console.log('meo meo')
+        }
+    }
+
+    return (
+        <button className='button' onClick={onClick}>Untrack User</button>
+    )
+}
+
+const TrackingUserItem = ({ user_name, pictureProfileUrl, total_following,createTime,updateTime }) => {
 
     return (
         <tr>
             <td><Avatar src={pictureProfileUrl} /> </td>
             <td>{user_name}</td>
             <td>{total_following}</td>
-            <td><button>X</button> </td>
+            <td>{formatDuration(createTime)}</td>
+            <td>{formatDuration(updateTime)}</td>
+            <td><UntrackButton user_name={user_name} /></td>
         </tr>
     )
 }

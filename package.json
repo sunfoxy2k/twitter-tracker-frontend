@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@aws-amplify/ui-react": "^3.5.10",
+    "@next/font": "^13.0.1",
     "@reduxjs/toolkit": "^1.8.5",
     "aws-amplify": "^4.3.42",
     "next": "^13.0.0",

@@ -35,3 +35,7 @@
 .flex-grow {
   flex: 1;
 }
+
+.button {
+  padding: var(--spacing-small) var(--spacing-medium);
+}

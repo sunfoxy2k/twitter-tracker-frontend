@@ -5,9 +5,13 @@ import LayoutStyle from "./layout.module.css"
 import FooterNote from "./Footer/Note";
 import FooterMenu from "./Footer/Menu";
 
+
+import { Inter } from '@next/font/google'
+const inter = Inter({ subsets: ['latin'] })
+
 const Layout = ({ children }) => {
   return (
-    <div className={LayoutStyle.container}>
+    <div className={`${LayoutStyle.container} ${inter.className}`}>
       <HeaderLayout className={LayoutStyle.header} />
       <MainLayout className={LayoutStyle.main}>
         {children}

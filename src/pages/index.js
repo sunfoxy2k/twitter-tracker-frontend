@@ -1,3 +1,4 @@
+import { withAuthenticator } from "@aws-amplify/ui-react";
 import React, { useEffect } from "react";
 import IndexPageStyle from '../styles/pages/index.module.css'
 
@@ -21,4 +22,4 @@ const IndexPage = () => {
     )
 }
 
-export default IndexPage;
+export default withAuthenticator(IndexPage);

@@ -8,6 +8,7 @@ import Modal from "../../UI_Component/Modal";
 import React, { useRef, useEffect, useState } from "react";
 import { Auth } from "aws-amplify";
 import { reset } from "../../store/currentUserReducer";
+import {persistor}
 
 const MenuItem = ({ href, content, className }) => {
     return (
@@ -27,16 +28,21 @@ const MenuList = () => {
         dispatch(reset());
     }
 
-    const currentUser = useSelector(state => state.currentUser.email)
+    const currentUser = useSelector(state => state.currentUser.user_name)
 
 
     let menu;
 
     if (currentUser) {
-        menu = <button onClick={logout}>Logout</button>
+        menu = (
+        <>
+            {currentUser}
+            <button onClick={logout}>Logout</button>
+        </>
+        )
     } else {
         menu = (
-                <MenuItem href='/login' content='Login' />
+            <MenuItem href='/login' content='Login' />
         )
     }
 

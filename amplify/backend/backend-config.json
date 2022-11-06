@@ -7,16 +7,14 @@
     }
   },
   "auth": {
-    "twitterfrontend5ea56c80": {
+    "twitterfrontend5d244928": {
       "service": "Cognito",
       "providerPlugin": "awscloudformation",
       "dependsOn": [],
       "customAuth": false,
       "frontendAuthConfig": {
         "socialProviders": [],
-        "usernameAttributes": [
-          "EMAIL"
-        ],
+        "usernameAttributes": [],
         "signupAttributes": [
           "EMAIL"
         ],

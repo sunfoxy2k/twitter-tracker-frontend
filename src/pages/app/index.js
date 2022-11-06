@@ -1,18 +1,25 @@
 import Widget from '../../modules/UI_Component/Widget'
 import { TrackingTable, FollowingTable } from '../../modules/Table';
-import { useListVictimQuery } from '../../modules/api';
+import { useListFollowingQuery, useListVictimQuery } from '../../modules/api';
 import { useRouter } from 'next/router';
 
 const App = () => {
     const router = useRouter();
-    const {type, } = router.query;
+    
+    const query = router.query.type == 'following' ? useListFollowingQuery : useListVictimQuery
+
+    let user_id;
+
+    if (router.query.type != 'following') {
+        // user_id = 
+    }
 
     const {
         data,
         isLoading, 
         isSuccess,
         isError
-    } = useListVictimQuery('meomeo')
+    } = query('meomeo')
 
 
 

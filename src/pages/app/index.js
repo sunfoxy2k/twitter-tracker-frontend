@@ -1,20 +1,35 @@
-import { useState, useEffect } from 'react'
 import Widget from '../../modules/UI_Component/Widget'
-import { TrackingTable } from '../../modules/Table';
+import { TrackingTable, FollowingTable } from '../../modules/Table';
+import { useListVictimQuery } from '../../modules/api';
+import { useRouter } from 'next/router';
 
 const App = () => {
-    const [data, setData] = useState([]);
+    const router = useRouter();
+    const {type, } = router.query;
 
-    useEffect(() => {
-        fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/result`).then(res => res.json())
-            .then(data => setData(data))
-    })
+    const {
+        data,
+        isLoading, 
+        isSuccess,
+        isError
+    } = useListVictimQuery('meomeo')
+
+
+
+    let content;
+
+    if (isLoading) {
+        content = 'Is Loading'
+    } else if (isSuccess) {
+        
+        content = <TrackingTable victims={data}  />
+    }
 
     return (
         <div>
-            <h1>Scrape List</h1>
+            <h1>List Current Tracking User</h1>
             <Widget>
-                <TrackingTable tracking_data={data} />
+                {content}
             </Widget>
         </div>
     )

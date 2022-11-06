@@ -6,7 +6,7 @@ import logoImage from './asset/logo.svg'
 
 const Logo = ({className}) => {
     return (
-        <ExportedImage src={logoImage} alt="logo-img" className={`${LogoStyle.logo} ${className}`} placeholder="empty" />
+        <ExportedImage src={logoImage} alt="logo-img" className={`${LogoStyle.logo} ${className}`} placeholder="empty" unoptimized/>
     )
 }
 export default Logo;

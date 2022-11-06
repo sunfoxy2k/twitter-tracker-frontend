@@ -2,10 +2,12 @@ import Link from "next/link";
 import HeaderStyle from './header.module.css'
 import { LogoLink } from "../../UI_Component/Logo";
 import { IoMenu } from 'react-icons/io5'
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { openModal } from "../../UI_Component/Modal/slice";
 import Modal from "../../UI_Component/Modal";
-import React, {useRef, useEffect, useState} from "react";
+import React, { useRef, useEffect, useState } from "react";
+import { Auth } from "aws-amplify";
+import { reset } from "../../store/currentUserReducer";
 
 const MenuItem = ({ href, content, className }) => {
     return (
@@ -18,13 +20,30 @@ const MenuItem = ({ href, content, className }) => {
 }
 
 const MenuList = () => {
-    const items = [
-        {href: '/login', content: 'Login'}
-    ]
+    const dispatch = useDispatch()
+
+    function logout() {
+        Auth.signOut();
+        dispatch(reset());
+    }
+
+    const currentUser = useSelector(state => state.currentUser.email)
+
+
+    let menu;
+
+    if (currentUser) {
+        menu = <button onClick={logout}>Logout</button>
+    } else {
+        menu = (
+                <MenuItem href='/login' content='Login' />
+        )
+    }
+
     return (
         <nav className={HeaderStyle.menu_list}>
             <ul>
-                {items.map((prop, idx) => <MenuItem {...prop} key={idx} />)}
+                {menu}
             </ul>
         </nav>
     )
@@ -45,7 +64,7 @@ const HeaderRight = () => {
     )
 }
 
-const HeaderLayout = ({className}) => {
+const HeaderLayout = ({ className }) => {
     const ref = useRef()
     const [height, set_height] = useState()
 
@@ -56,10 +75,10 @@ const HeaderLayout = ({className}) => {
     return (
         <div className={`${HeaderStyle.container} ${className}`}>
             <header className={HeaderStyle.header} ref={ref}>
-                <LogoLink className={HeaderStyle.logo}/>
+                <LogoLink className={HeaderStyle.logo} />
                 <HeaderRight />
             </header>
-            <div className={HeaderStyle.offset} style={{'height' : height}}/>
+            <div className={HeaderStyle.offset} style={{ 'height': height }} />
         </div>
     )
 }

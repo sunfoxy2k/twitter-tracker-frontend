@@ -1,23 +1,26 @@
 {
-    "dev": {
-        "awscloudformation": {
-            "AuthRoleName": "amplify-twitterfrontend-dev-233810-authRole",
-            "UnauthRoleArn": "arn:aws:iam::645028103369:role/amplify-twitterfrontend-dev-233810-unauthRole",
-            "AuthRoleArn": "arn:aws:iam::645028103369:role/amplify-twitterfrontend-dev-233810-authRole",
-            "Region": "eu-west-3",
-            "DeploymentBucketName": "amplify-twitterfrontend-dev-233810-deployment",
-            "UnauthRoleName": "amplify-twitterfrontend-dev-233810-unauthRole",
-            "StackName": "amplify-twitterfrontend-dev-233810",
-            "StackId": "arn:aws:cloudformation:eu-west-3:645028103369:stack/amplify-twitterfrontend-dev-233810/16194330-57a8-11ed-b55d-0a426f60939a",
-            "AmplifyAppId": "d3dczf3qfgvvt6"
-        },
-        "categories": {
-            "hosting": {
-                "amplifyhosting": {
-                    "appId": "d3dczf3qfgvvt6",
-                    "type": "manual"
-                }
-            }
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-twitterfrontend-dev-233810-authRole",
+      "UnauthRoleArn": "arn:aws:iam::645028103369:role/amplify-twitterfrontend-dev-233810-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::645028103369:role/amplify-twitterfrontend-dev-233810-authRole",
+      "Region": "eu-west-3",
+      "DeploymentBucketName": "amplify-twitterfrontend-dev-233810-deployment",
+      "UnauthRoleName": "amplify-twitterfrontend-dev-233810-unauthRole",
+      "StackName": "amplify-twitterfrontend-dev-233810",
+      "StackId": "arn:aws:cloudformation:eu-west-3:645028103369:stack/amplify-twitterfrontend-dev-233810/16194330-57a8-11ed-b55d-0a426f60939a",
+      "AmplifyAppId": "d3dczf3qfgvvt6"
+    },
+    "categories": {
+      "hosting": {
+        "amplifyhosting": {
+          "appId": "d3dczf3qfgvvt6",
+          "type": "manual"
         }
+      },
+      "auth": {
+        "twitterfrontend5ea56c80": {}
+      }
     }
+  }
 }

@@ -1,4 +1,4 @@
-import { configureStore } from '@reduxjs/toolkit'
+import { configureStore } from '@reduxjs/toolkit';
 // import {
 //   persistStore,
 //   persistReducer,
@@ -12,6 +12,7 @@ import { configureStore } from '@reduxjs/toolkit'
 // import storage from 'redux-persist/lib/storage'
 
 import rootReducer from './rootReducer'
+import { trackerAPI } from '../api';
 
 // const persistConfig = {
 //   key: 'root',
@@ -35,7 +36,8 @@ import rootReducer from './rootReducer'
 
 
 const store = configureStore({
-  reducer: rootReducer
+  reducer: rootReducer,
+  middleware : (getDefaultMiddleware) => getDefaultMiddleware().concat(trackerAPI.middleware)
 })
 
 export default store

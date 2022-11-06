@@ -1,8 +1,12 @@
 import {combineReducers} from "@reduxjs/toolkit";
 import UI_reducer from "../UI_Component/reducer";
+import { trackerAPI } from "../api";
+import currentUser from './currentUserReducer'
 
 const reducer = combineReducers({
-    ui: UI_reducer
+    ui: UI_reducer,
+    currentUser,    
+    [trackerAPI.reducerPath] : trackerAPI.reducer
 });
 
 export default reducer;

@@ -18,21 +18,25 @@ const Layout = ({ children }) => {
   const path = router.pathname
   const isLogin = useSelector(state => state.auth.isLogin)
 
-  function isProtectedRoute (path) {
-    return path.includes('/app')
+
+  function checkNeedToLogin (path, isLogin)  {
+    const isProtectedRoute = path.includes('/app')
+
+    return isProtectedRoute &&  !!!(isLogin)
   }
 
-  function isLandingPage(path) {
-    return path == '/' || path == ''
+  function checkNeedToApp (path, isLogin) {
+    const isLandingPage = path == '/' || path == ''
+    return isLandingPage && isLogin
   }
 
   useEffect(() => {
-    if (isProtectedRoute(path) &&  !!!(isLogin)) {
+    if (checkNeedToLogin(path, isLogin)) {
       router.push('/login')
       return
     }
 
-    if (isLandingPage(path) && isLogin) {
+    if (checkNeedToApp(path, isLogin)) {
       router.replace('/app')
     }
   }, [path])
@@ -41,7 +45,7 @@ const Layout = ({ children }) => {
     <div className={`${LayoutStyle.container} ${inter.className}`}>
       <HeaderLayout className={LayoutStyle.header} />
       <MainLayout className={LayoutStyle.main}>
-        {children}
+        {checkNeedToLogin(path, isLogin) || children}
       </MainLayout>
       <FooterNote className={LayoutStyle.footer__note} />
       <FooterMenu className={LayoutStyle.footer__menu} />

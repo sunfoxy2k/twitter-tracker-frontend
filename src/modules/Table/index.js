@@ -74,11 +74,11 @@ const TrackingUserItem = ({ userName, pictureProfileUrl, totalFollowing, createT
     )
 }
 
-const FollowingUserItem = ({userName, pictureProfileUrl, updateTime}) => {
+const FollowingUserItem = ({userName, pictureProfileUrl, updateTime, profileUrl}) => {
     return (
         <tr>
             <td><Avatar src={pictureProfileUrl} /> </td>
-            <td>{userName}</td>
+            <td><a href={profileUrl} target="_blank" rel="noopener noreferrer">{userName}</a> </td>
             <td>{formatDuration(updateTime)}</td>
         </tr>
     )

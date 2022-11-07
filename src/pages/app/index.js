@@ -32,7 +32,9 @@ const App = () => {
         isLoading, 
         isSuccess,
         isError
-    } = useListVictimQuery(userName)
+    } = useListVictimQuery(userName, {
+        skip : !!!userName
+    })
 
     return (
         <div>

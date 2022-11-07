@@ -1,24 +1,34 @@
 import { useRouter } from "next/router";
 import Widget from "../../modules/UI_Component/Widget";
-import { useListFollowingQuery } from "../../modules/api";
+import { useListFollowingQuery, useListVictimQuery } from "../../modules/api";
 import { FollowingTable } from "../../modules/Table";
+import { useSelector } from "react-redux";
 
 const TrackingPage = () => {
     const router = useRouter()
-    const {userName} = router.query
+    const {userName: twitterTrackingUser } = router.query
+    const currentUser = useSelector(state => state.auth.userName) 
     
+    const {
+        data : twitterUserData,
+    } = useListVictimQuery(currentUser, {skip : !!!currentUser})
+
+    const shouldQueryFollowing = twitterUserData && twitterUserData.allIds.includes(twitterTrackingUser)
+
     const {
         data,
         isLoading, 
         isSuccess,
         isError
-    } = useListFollowingQuery(userName)
+    } = useListFollowingQuery(twitterTrackingUser, {skip : !!!shouldQueryFollowing})
+
+    // const {profileUrl} = !!twitterUserData ? twitterUserData.byId[twitterTrackingUser] : 'https://twitter.com/home'
 
     return (
         <div>
             <div>
                 <h3>Current Following User : </h3>
-                <a href="http://" target="_blank" rel="noopener noreferrer">{userName}</a>
+                <a  target="_blank" rel="noopener noreferrer">{twitterTrackingUser}</a>
             </div>
             <Widget>
                 {

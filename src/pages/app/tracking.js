@@ -16,7 +16,10 @@ const TrackingPage = () => {
 
     return (
         <div>
-            <h1>Current Tracking</h1>
+            <div>
+                <h3>Current Following User : </h3>
+                <a href="http://" target="_blank" rel="noopener noreferrer">{userName}</a>
+            </div>
             <Widget>
                 {
                     isLoading ? 'Is Loading' : isSuccess && data ? <FollowingTable data={data} /> : 'Data is not Available'

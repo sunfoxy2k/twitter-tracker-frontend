@@ -7,15 +7,35 @@ import FooterMenu from "./Footer/Menu";
 import { getAuthUser } from "../auth";
 
 import { Inter } from '@next/font/google'
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+
+import { useRouter } from "next/router";
+
 const inter = Inter({ subsets: ['latin'] })
 
 const Layout = ({ children }) => {
-  const dispatch = useDispatch()
+  const router = useRouter()
+  const path = router.pathname
+  const isLogin = useSelector(state => state.auth.isLogin)
+
+  function isProtectedRoute (path) {
+    return path.includes('/app')
+  }
+
+  function isLandingPage(path) {
+    return path == '/' || path == ''
+  }
 
   useEffect(() => {
-    getAuthUser(dispatch)
-  }, [])
+    if (isProtectedRoute(path) &&  !!!(isLogin)) {
+      router.push('/login')
+      return
+    }
+
+    if (isLandingPage(path) && isLogin) {
+      router.replace('/app')
+    }
+  }, [path])
 
   return (
     <div className={`${LayoutStyle.container} ${inter.className}`}>

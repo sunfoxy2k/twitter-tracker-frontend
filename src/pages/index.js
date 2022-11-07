@@ -15,11 +15,6 @@ const IndexPage = () => {
     const isLogin = useSelector(state => state.auth.isLogin)
     const router = useRouter()
 
-    useEffect(() => {
-        if(isLogin) {
-            router.push('/app')            
-        }        
-    }, [])
 
     return (
         <div className={IndexPageStyle.container}>

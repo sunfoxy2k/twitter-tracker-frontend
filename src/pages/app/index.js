@@ -22,7 +22,6 @@ const AuthApp = () => {
     return <App />
 }
 
-export default withAuthenticator(AuthApp);
 
 
 const App = () => {
@@ -46,3 +45,5 @@ const App = () => {
         </div>
     )
 }
+
+export default App;

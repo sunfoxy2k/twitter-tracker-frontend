@@ -10,7 +10,11 @@ export const TrackingTable = ({ data }) => {
         map((e, idx) => <th key={idx}>{e}</th>);
 
 
-    const rows = data.map((prop, idx) => <TrackingUserItem  {...prop} key={idx} />)
+    const rowID = data.allIds
+
+    const rowsData = rowID.map(id => data.byId[id])
+
+    const rows = rowsData.map((prop, idx) => <TrackingUserItem  {...prop} key={idx} />)
 
     return (
         <BaseTable headers={headers} rows={rows} />
@@ -20,7 +24,11 @@ export const TrackingTable = ({ data }) => {
 export const FollowingTable = ({data}) => {
     const headers = ["", "Twitter User", "lastUpdateTime"].map((e, idx) => <th key={idx}>{e}</th>)
 
-    const rows = data.map((prop, idx) => <FollowingUserItem {...prop} key={idx} />)
+    const rowID = data.allIds
+
+    const rowsData = rowID.map(id => data.byId[id])
+
+    const rows = rowsData.map((prop, idx) => <FollowingUserItem  {...prop} key={idx} />)
 
     return (
         <BaseTable headers={headers} rows={rows} />
@@ -52,25 +60,25 @@ const UntrackButton = ({ user_name }) => {
     )
 }
 
-const TrackingUserItem = ({ user_name, pictureProfileUrl, total_following, createTime, updateTime }) => {
+const TrackingUserItem = ({ userName, pictureProfileUrl, totalFollowing, createTime, updateTime, id }) => {
 
     return (
         <tr>
             <td><Avatar src={pictureProfileUrl} /> </td>
-            <td> <Link href={`/app/tracking?userName=${user_name}`}>{user_name}</Link></td>
-            <td>{total_following}</td>
+            <td> <Link href={`/app/tracking?userName=${id}`}>{userName}</Link></td>
+            <td>{totalFollowing}</td>
             <td>{formatDuration(createTime)}</td>
             <td>{formatDuration(updateTime)}</td>
-            <td><UntrackButton user_name={user_name} /></td>
+            <td><UntrackButton user_name={userName} /></td>
         </tr>
     )
 }
 
-const FollowingUserItem = ({user_name, pictureProfileUrl, updateTime}) => {
+const FollowingUserItem = ({userName, pictureProfileUrl, updateTime}) => {
     return (
         <tr>
             <td><Avatar src={pictureProfileUrl} /> </td>
-            <td>{user_name}</td>
+            <td>{userName}</td>
             <td>{formatDuration(updateTime)}</td>
         </tr>
     )

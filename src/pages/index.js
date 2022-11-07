@@ -1,5 +1,6 @@
-import { withAuthenticator } from "@aws-amplify/ui-react";
 import React, { useEffect } from "react";
+import { useRouter } from "next/router";
+import { useSelector } from "react-redux";
 import IndexPageStyle from '../styles/pages/index.module.css'
 
 const HeroSection = () => {
@@ -11,8 +12,13 @@ const HeroSection = () => {
 }
 
 const IndexPage = () => {
+    const isLogin = useSelector(state => state.auth.isLogin)
+    const router = useRouter()
+
     useEffect(() => {
-        
+        if(isLogin) {
+            router.push('/app')            
+        }        
     }, [])
 
     return (
@@ -22,4 +28,4 @@ const IndexPage = () => {
     )
 }
 
-export default withAuthenticator(IndexPage);
+export default IndexPage;

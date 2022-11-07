@@ -6,9 +6,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { openModal } from "../../UI_Component/Modal/slice";
 import Modal from "../../UI_Component/Modal";
 import React, { useRef, useEffect, useState } from "react";
-import { Auth } from "aws-amplify";
-import { reset } from "../../store/currentUserReducer";
-import {persistor}
+import { logout as logoutAuth } from "../../auth";
+import { useRouter } from "next/router";
 
 const MenuItem = ({ href, content, className }) => {
     return (
@@ -20,36 +19,33 @@ const MenuItem = ({ href, content, className }) => {
     )
 }
 
-const MenuList = () => {
+const AuthHeader = (currentUser) => {
     const dispatch = useDispatch()
+    const router = useRouter()
 
-    function logout() {
-        Auth.signOut();
-        dispatch(reset());
+    const logout = () => {
+        logoutAuth(dispatch)
+        router.push('/')
     }
 
-    const currentUser = useSelector(state => state.currentUser.user_name)
-
-
-    let menu;
-
-    if (currentUser) {
-        menu = (
+    return (
         <>
-            {currentUser}
-            <button onClick={logout}>Logout</button>
+            <li>{currentUser}</li>
+            <li><button onClick={logout}>Logout</button></li>
         </>
-        )
-    } else {
-        menu = (
-            <MenuItem href='/login' content='Login' />
-        )
-    }
+    )    
+}
+
+
+const MenuList = () => {
+    const userName = useSelector(state => state.auth.userName)
 
     return (
         <nav className={HeaderStyle.menu_list}>
             <ul>
-                {menu}
+                {
+                    userName ? AuthHeader(userName) : <MenuItem href='/app' content='Login' />
+                }
             </ul>
         </nav>
     )

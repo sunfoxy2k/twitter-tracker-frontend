@@ -1,11 +1,11 @@
 import {combineReducers} from "@reduxjs/toolkit";
 import UI_reducer from "../UI_Component/reducer";
 import { trackerAPI } from "../api";
-import currentUser from './currentUserReducer'
+import auth from '../auth/reducer'
 
 const reducer = combineReducers({
     ui: UI_reducer,
-    currentUser,    
+    auth,    
     [trackerAPI.reducerPath] : trackerAPI.reducer
 });
 

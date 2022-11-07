@@ -1,13 +1,18 @@
 
 import { Auth } from "aws-amplify";
-import { setUp } from "../store/currentUserReducer";
+import { login, logout as logoutAction } from "./reducer";
 
 async function getAuthUser(dispatch) {
     const user = await Auth.currentUserInfo();
     if (user) {
-        const setUpAction = setUp(user.attributes.email);
+        const setUpAction = login(user.username);
         dispatch(setUpAction);
     }
 }
 
-export { getAuthUser }
+async function logout(dispatch) {
+    dispatch(logoutAction())
+    Auth.signOut()
+}
+
+export { getAuthUser, logout }

@@ -2,44 +2,47 @@ import Widget from '../../modules/UI_Component/Widget'
 import { TrackingTable, FollowingTable } from '../../modules/Table';
 import { useListFollowingQuery, useListVictimQuery } from '../../modules/api';
 import { useRouter } from 'next/router';
+import { withAuthenticator } from '@aws-amplify/ui-react';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { login } from '../../modules/auth/reducer';
+import { Auth } from 'aws-amplify';
+import { getAuthUser } from '../../modules/auth';
+
+const AuthApp = () => {
+    const dispatch = useDispatch()
+    const userName = useSelector(state => state.auth.userName)
+
+    useEffect(() => {
+        if (!!!userName) {
+            getAuthUser(dispatch)
+        }
+    }, [])
+
+    return <App />
+}
+
+export default withAuthenticator(AuthApp);
+
 
 const App = () => {
-    const router = useRouter();
-    
-    const query = router.query.type == 'following' ? useListFollowingQuery : useListVictimQuery
-
-    let user_id;
-
-    if (router.query.type != 'following') {
-        // user_id = 
-    }
+    const userName = useSelector(state => state.auth.userName)
 
     const {
         data,
         isLoading, 
         isSuccess,
         isError
-    } = query('meomeo')
-
-
-
-    let content;
-
-    if (isLoading) {
-        content = 'Is Loading'
-    } else if (isSuccess) {
-        
-        content = <TrackingTable victims={data}  />
-    }
+    } = useListVictimQuery(userName)
 
     return (
         <div>
             <h1>List Current Tracking User</h1>
             <Widget>
-                {content}
+                {
+                    isLoading ? 'Is Loading' : isSuccess && <TrackingTable data={data} />
+                }
             </Widget>
         </div>
     )
 }
-
-export default App;

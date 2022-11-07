@@ -4,26 +4,26 @@ import TableStyle from './table.module.css'
 import Link from 'next/link'
 import { formatDuration } from './time';
 
-export const TrackingTable = ({ victims }) => {
+export const TrackingTable = ({ data }) => {
 
     const headers = ["", "Twitter User", "Number of Following", "lastUpdateTime", "addedTime", ""].
         map((e, idx) => <th key={idx}>{e}</th>);
 
 
-    const rows = victims.map((prop, idx) => <TrackingUserItem  {...prop} key={idx} />)
+    const rows = data.map((prop, idx) => <TrackingUserItem  {...prop} key={idx} />)
 
     return (
         <BaseTable headers={headers} rows={rows} />
     )
 }
 
-export const FollowingTable = ({following}) => {
+export const FollowingTable = ({data}) => {
     const headers = ["", "Twitter User", "lastUpdateTime"].map((e, idx) => <th key={idx}>{e}</th>)
 
-    const rows = following.map((prop, idx) => <FollowingUserItem {...prop} key={idx} />)
+    const rows = data.map((prop, idx) => <FollowingUserItem {...prop} key={idx} />)
 
     return (
-        <BaseTable header={headers} rows={rows} />
+        <BaseTable headers={headers} rows={rows} />
     )
 }
 
@@ -57,7 +57,7 @@ const TrackingUserItem = ({ user_name, pictureProfileUrl, total_following, creat
     return (
         <tr>
             <td><Avatar src={pictureProfileUrl} /> </td>
-            <td> <Link href={`/app/tracking/${user_name}`}>{user_name}</Link></td>
+            <td> <Link href={`/app/tracking?userName=${user_name}`}>{user_name}</Link></td>
             <td>{total_following}</td>
             <td>{formatDuration(createTime)}</td>
             <td>{formatDuration(updateTime)}</td>

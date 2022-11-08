@@ -1,48 +1,49 @@
 import Widget from '../../modules/UI_Component/Widget'
-import { TrackingTable, FollowingTable } from '../../modules/Table';
-import { useListFollowingQuery, useListVictimQuery } from '../../modules/api';
-import { useRouter } from 'next/router';
-import { withAuthenticator } from '@aws-amplify/ui-react';
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { login } from '../../modules/auth/reducer';
-import { Auth } from 'aws-amplify';
-import { getAuthUser } from '../../modules/auth';
-
-const AuthApp = () => {
-    const dispatch = useDispatch()
-    const userName = useSelector(state => state.auth.userName)
-
-    useEffect(() => {
-        if (!!!userName) {
-            getAuthUser(dispatch)
-        }
-    }, [])
-
-    return <App />
-}
-
-
+import { TrackingTable } from '../../modules/Table';
+import { useListVictimQuery } from '../../modules/api';
+import { useSelector } from 'react-redux';
+import AppStyle from '../../styles/pages/app/index.module.css'
+import { IoReload } from 'react-icons/io5'
 
 const App = () => {
     const userName = useSelector(state => state.auth.userName)
 
     const {
         data,
-        isLoading, 
+        isLoading,
         isSuccess,
-        isError
+        isError,
+        refetch
     } = useListVictimQuery(userName, {
-        skip : !!!userName
+        skip: !!!userName
     })
+
+    const refetchData = () => {
+        refetch()
+    }
 
     return (
         <div>
-            <h1>List Current Tracking User</h1>
             <Widget>
+                <div className={AppStyle.header}>
+                    <form className={AppStyle.form}>
+                        <label htmlFor="add-tracker"><h3>Adding Twitter to track:</h3> </label>
+                        <span>
+                            <span>https://twitter.com/</span>
+                            <input type="text" id="add-tracker" placeholder='elonmusk' />
+                        </span>
+                        <button type="submit">Submit</button>
+                    </form>
+                    <button onClick={refetchData} className="alter"> <IoReload /> </button>
+                </div>
                 {
-                    isLoading ? 'Is Loading' : isSuccess && <TrackingTable data={data} />
+                    isLoading ? 'Is Loading' : isSuccess && data && <TrackingTable data={data} className={AppStyle.table} />
                 }
+                <div className={AppStyle.info}>
+                    <h3>Current Number Tracking:</h3>
+                    <div>{data && data.allIds.length}</div>
+                </div>
+
             </Widget>
         </div>
     )

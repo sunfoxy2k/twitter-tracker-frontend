@@ -45,7 +45,7 @@ const Layout = ({ children }) => {
     <div className={`${LayoutStyle.container} ${inter.className}`}>
       <HeaderLayout className={LayoutStyle.header} />
       <MainLayout className={LayoutStyle.main}>
-        {checkNeedToLogin(path, isLogin) || children}
+        {checkNeedToLogin(path, isLogin) ? "is Loading" : children}
       </MainLayout>
       <FooterNote className={LayoutStyle.footer__note} />
       <FooterMenu className={LayoutStyle.footer__menu} />

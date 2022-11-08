@@ -4,7 +4,7 @@ import TableStyle from './table.module.css'
 import Link from 'next/link'
 import { formatDuration } from './time';
 
-export const TrackingTable = ({ data }) => {
+export const TrackingTable = ({ data, className }) => {
 
     const headers = ["", "Twitter User", "Number of Following", "lastUpdateTime", "addedTime", ""].
         map((e, idx) => <th key={idx}>{e}</th>);
@@ -17,11 +17,11 @@ export const TrackingTable = ({ data }) => {
     const rows = rowsData.map((prop, idx) => <TrackingUserItem  {...prop} key={idx} />)
 
     return (
-        <BaseTable headers={headers} rows={rows} />
+        <BaseTable headers={headers} rows={rows} className={className} />
     )
 }
 
-export const FollowingTable = ({data}) => {
+export const FollowingTable = ({data, className}) => {
     const headers = ["", "Twitter User", "lastUpdateTime"].map((e, idx) => <th key={idx}>{e}</th>)
 
     const rowID = data.allIds
@@ -31,13 +31,13 @@ export const FollowingTable = ({data}) => {
     const rows = rowsData.map((prop, idx) => <FollowingUserItem  {...prop} key={idx} />)
 
     return (
-        <BaseTable headers={headers} rows={rows} />
+        <BaseTable headers={headers} rows={rows} className={className} />
     )
 }
 
-const BaseTable = ({headers, rows}) => {
+const BaseTable = ({headers, rows, className}) => {
     return (
-        <table className={TableStyle.table} >
+        <table className={`${TableStyle.table} ${className}`} >
             <thead>
                 <tr>{headers}</tr>
             </thead>

@@ -8,11 +8,12 @@ import Modal from "../../UI_Component/Modal";
 import React, { useRef, useEffect, useState } from "react";
 import { logout as logoutAuth } from "../../auth";
 import { useRouter } from "next/router";
+import {CgProfile} from 'react-icons/cg'
 
 const MenuItem = ({ href, content, className }) => {
     return (
         <li className={className}>
-            <Link href={href}>
+            <Link href={href} className={HeaderStyle.button}>
                 {content}
             </Link>
         </li>
@@ -30,8 +31,8 @@ const AuthHeader = (currentUser) => {
 
     return (
         <>
-            <li>{currentUser}</li>
-            <li><button onClick={logout}>Logout</button></li>
+            <li><Link href="/app/user" className={HeaderStyle.profile}><CgProfile /> {currentUser}</Link></li>
+            <li><button onClick={logout} className={`alter`}>Logout</button></li>
         </>
     )    
 }
@@ -74,10 +75,14 @@ const HeaderLayout = ({ className }) => {
         set_height(ref.current.offsetHeight)
     }, [])
 
+    const isLogin = useSelector(state => state.auth.isLogin)
+
+    const href = isLogin? '/app' : '/'
+
     return (
         <div className={`${HeaderStyle.container} ${className}`}>
             <header className={HeaderStyle.header} ref={ref}>
-                <LogoLink className={HeaderStyle.logo} />
+                <LogoLink className={HeaderStyle.logo} href={href} />
                 <HeaderRight />
             </header>
             <div className={HeaderStyle.offset} style={{ 'height': height }} />

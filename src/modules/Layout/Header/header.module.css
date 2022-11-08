@@ -34,6 +34,12 @@
     padding: var(--pading-vertical) var(--padding-inline);
 }
 
+.profile {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-small);
+}
+
 .right {
 }
 
@@ -44,7 +50,12 @@
 
 .menu_list ul{
     display: flex;
+    align-items: center;
     gap: var(--spacing-medium);
+}
+
+.menu_list ul>li {
+    display: contents;
 }
 
 .menu_list img,

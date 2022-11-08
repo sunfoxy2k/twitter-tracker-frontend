@@ -39,3 +39,20 @@
 .button {
   padding: var(--spacing-small) var(--spacing-medium);
 }
+
+.right {
+  float: right !important;
+}
+
+button.alter {
+    background-color: transparent;
+    border: solid 2px var(--primary-color);
+    color: black;
+
+}
+
+button.alter:hover {
+    background-color: var(--primary-color);
+    color: white;
+
+}

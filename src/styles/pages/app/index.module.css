@@ -1,0 +1,33 @@
+.info {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-medium);
+    font-size: var(--fs-big-text);
+}
+
+.info h3 {
+    margin: var(--spacing-small) 0;
+}
+
+.form {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-medium);
+
+    /* padding-top: var(--spacing-large); */
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: var(--spacing-large);
+}
+
+.header button {
+    padding: var(--spacing-small);
+    height: fit-content;
+}
+
+.table {
+    margin: var(--spacing-large) 0;
+}

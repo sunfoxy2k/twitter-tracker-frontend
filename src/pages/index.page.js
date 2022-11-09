@@ -1,7 +1,7 @@
 import React from "react";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
-import IndexPageStyle from './index.module.css'
+import IndexPageStyle from './style/index.module.css'
 
 const HeroSection = () => {
     return (

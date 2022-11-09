@@ -1,10 +1,10 @@
 import { useRouter } from "next/router";
-import Widget from "../../../modules/UI_Component/Widget";
-import { useListFollowingQuery, useListVictimQuery } from "../../../modules/store/api";
-import { FollowingTable } from "../Table";
+import Widget from "../../modules/UI_Component/Widget";
+import { useListFollowingQuery, useListVictimQuery } from "../api";
+import { FollowingTable } from "./component/Table";
 import { useSelector } from "react-redux";
-import TrackingPageStyle from "./tracking.module.css";
-import Avatar from "../../../modules/UI_Component/Avatar";
+import TrackingPageStyle from "./style/tracking.module.css";
+import Avatar from "../../modules/UI_Component/Avatar";
 import Link from "next/link";
 import {IoArrowBackCircle} from 'react-icons/io5'
 

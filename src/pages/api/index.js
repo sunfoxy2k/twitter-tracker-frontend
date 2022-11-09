@@ -59,4 +59,5 @@ export const trackerAPI = createApi({
     })
 })
 
-export const { useListVictimQuery, useListFollowingQuery } = trackerAPI
+export const { useListVictimQuery, useListFollowingQuery, useAddVictimMutation, useUpdateUserMutation, useDeleteVictimMutation
+ } = trackerAPI

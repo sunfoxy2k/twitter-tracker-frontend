@@ -1,8 +1,10 @@
 
-import Avatar from '../../../modules/UI_Component/Avatar';
+import Avatar from '../../../../modules/UI_Component/Avatar';
 import TableStyle from './table.module.css'
 import Link from 'next/link'
 import { formatDuration } from './time';
+import { useDeleteVictimMutation } from '../../../api';
+import { useEffect } from 'react';
 
 export const TrackingTable = ({ data, className }) => {
 
@@ -49,9 +51,20 @@ const BaseTable = ({headers, rows, className}) => {
 }
 
 const UntrackButton = ({ user_name }) => {
+    const [ deleteVictim, apiResult] = useDeleteVictimMutation();
+
+    const {
+        data,
+        isSuccess,
+    } = apiResult
+
+    useEffect(() => {
+        console.log(data)
+    }, [isSuccess])
+
     const onClick = () => {
         if (confirm(`Do you want to untrack user "${user_name}"`) == true) {
-            console.log('meo meo')
+            deleteVictim(user_name)
         }
     }
 

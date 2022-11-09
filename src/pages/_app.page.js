@@ -2,7 +2,7 @@ import React from "react";
 import '@aws-amplify/ui-react/styles.css';
 
 import "normalize.css";
-import "./style/globals.css";
+import "./style/_app/globals.css";
 
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";

@@ -1,9 +1,46 @@
 import Widget from '../../modules/UI_Component/Widget'
-import {TrackingTable} from './Table'
-import { useListVictimQuery } from '../../modules/store/api';
+import { TrackingTable } from './component/Table'
+import { useListVictimQuery } from '../api';
 import { useSelector } from 'react-redux';
-import AppStyle from './index.module.css'
-import { IoReload } from 'react-icons/io5'
+import AppStyle from './style/index.module.css'
+import { IoReload } from 'react-icons/io5';
+import { useAddVictimMutation } from '../api';
+import { useEffect, useState } from 'react';
+
+
+const AddVictimForm = () => {
+    const [addVictim, result] = useAddVictimMutation('');
+
+    const {
+        data,
+        isLoading,
+        isSuccess,
+    } = result
+
+    const [user, setUser] = useState('')
+
+    function handleSubmit(event) {
+        event.preventDefault();
+        console.log(event.target.value);
+        addVictim(user);
+    }
+
+    useEffect(() => {
+        console.log(data)
+    }, [isSuccess])
+
+    return (
+        <form className={AppStyle.form} onSubmit={handleSubmit}>
+            <label htmlFor="add-tracker"><h3>Adding Twitter to track:</h3> </label>
+            <span>
+                <span>https://twitter.com/</span>
+                <input type="text" id="add-tracker" placeholder='elonmusk' name='victim' value={user} onChange={e => setUser(e.target.value)} />
+            </span>
+            <button type="submit">Submit</button>
+        </form>
+
+    )
+}
 
 const App = () => {
     const userName = useSelector(state => state.auth.userName)
@@ -23,18 +60,12 @@ const App = () => {
         refetch()
     }
 
+
     return (
         <div>
             <Widget>
                 <div className={AppStyle.header}>
-                    <form className={AppStyle.form}>
-                        <label htmlFor="add-tracker"><h3>Adding Twitter to track:</h3> </label>
-                        <span>
-                            <span>https://twitter.com/</span>
-                            <input type="text" id="add-tracker" placeholder='elonmusk' />
-                        </span>
-                        <button type="submit">Submit</button>
-                    </form>
+                    <AddVictimForm />
                     <button onClick={refetchData} className="alter"> <IoReload /> </button>
                 </div>
                 {

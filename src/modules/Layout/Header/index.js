@@ -6,9 +6,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { openModal } from "../../UI_Component/Modal/slice";
 import Modal from "../../UI_Component/Modal";
 import React, { useRef, useEffect, useState } from "react";
-import { logout as logoutAuth } from "../../store/auth";
+import { logout as logoutAction } from "../../store/authReducer";
 import { useRouter } from "next/router";
-import {CgProfile} from 'react-icons/cg'
+import { CgProfile } from 'react-icons/cg'
+import { Auth } from "aws-amplify";
+import {persistor} from '../../store'
 
 const MenuItem = ({ href, content, className }) => {
     return (
@@ -24,17 +26,21 @@ const AuthHeader = (currentUser) => {
     const dispatch = useDispatch()
     const router = useRouter()
 
-    const logout = () => {
-        logoutAuth(dispatch)
+    function logout() {
+        dispatch(logoutAction())
+        Auth.signOut()
+        persistor.purge()
         router.push('/')
     }
+
+
 
     return (
         <>
             <li><Link href="/app/user" className={HeaderStyle.profile}><CgProfile /> {currentUser}</Link></li>
             <li><button onClick={logout} className={`alter`}>Logout</button></li>
         </>
-    )    
+    )
 }
 
 
@@ -77,7 +83,7 @@ const HeaderLayout = ({ className }) => {
 
     const isLogin = useSelector(state => state.auth.isLogin)
 
-    const href = isLogin? '/app' : '/'
+    const href = isLogin ? '/app' : '/'
 
     return (
         <div className={`${HeaderStyle.container} ${className}`}>

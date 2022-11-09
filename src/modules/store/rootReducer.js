@@ -1,8 +1,8 @@
 import {combineReducers} from "@reduxjs/toolkit";
-import UI_reducer from "../UI_Component/reducer";
-import { trackerAPI } from "./api";
-import auth from './auth/reducer'
-import {logout} from './auth/reducer'
+import UI_reducer from "../../modules/UI_Component/reducer";
+import { trackerAPI } from "../../pages/api";
+import auth from './authReducer'
+import {logout as logoutAction} from './authReducer'
 
 const appReducer = combineReducers({
     ui: UI_reducer,
@@ -11,7 +11,7 @@ const appReducer = combineReducers({
 });
 
 const rootReducer = (state, action) => {
-    if (logout.match(action)) {
+    if (logoutAction.match(action)) {
         state = {};
     }
 

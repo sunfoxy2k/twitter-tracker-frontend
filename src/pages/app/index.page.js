@@ -2,7 +2,7 @@ import Widget from '../../modules/UI_Component/Widget'
 import {TrackingTable} from './Table'
 import { useListVictimQuery } from '../../modules/store/api';
 import { useSelector } from 'react-redux';
-import AppStyle from '../../styles/pages/app/index.module.css'
+import AppStyle from './index.module.css'
 import { IoReload } from 'react-icons/io5'
 
 const App = () => {

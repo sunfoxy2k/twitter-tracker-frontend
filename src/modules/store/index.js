@@ -12,7 +12,7 @@ import {
 import storage from 'redux-persist/lib/storage'
 
 import rootReducer from './rootReducer'
-import { trackerAPI } from '../api';
+import { trackerAPI } from './api';
 
 const persistConfig = {
   key: 'root',

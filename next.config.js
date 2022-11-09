@@ -22,6 +22,7 @@ const nextConfig = {
     // placeholder images in the console.
     nextImageExportOptimizer_generateAndUseBlurImages: true,
   },
+  pageExtensions: ['page.tsx', 'page.ts', 'page.jsx', 'page.js']
 }
 
 module.exports = nextConfig;

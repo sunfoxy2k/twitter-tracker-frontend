@@ -1,5 +1,5 @@
 
-import Avatar from '../UI_Component/Avatar'
+import Avatar from '../../../modules/UI_Component/Avatar';
 import TableStyle from './table.module.css'
 import Link from 'next/link'
 import { formatDuration } from './time';

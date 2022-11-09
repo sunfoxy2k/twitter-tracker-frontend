@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import Widget from "../../modules/UI_Component/Widget";
-import { useListFollowingQuery, useListVictimQuery } from "../../modules/api";
-import { FollowingTable } from "../../modules/Table";
+import { useListFollowingQuery, useListVictimQuery } from "../../modules/store/api";
+import { FollowingTable } from "./Table";
 import { useSelector } from "react-redux";
 import TrackingPageStyle from "../../styles/pages/app/tracking.module.css";
 import Avatar from "../../modules/UI_Component/Avatar";

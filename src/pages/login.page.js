@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { withAuthenticator } from "@aws-amplify/ui-react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAuthUser } from "../modules/auth";
+import { getAuthUser } from '../modules/store/auth';
 
 const LoginPage = () => {
     const router = useRouter()

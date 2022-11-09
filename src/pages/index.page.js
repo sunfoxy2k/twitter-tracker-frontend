@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
 import IndexPageStyle from '../styles/pages/index.module.css'

@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { openModal } from "../../UI_Component/Modal/slice";
 import Modal from "../../UI_Component/Modal";
 import React, { useRef, useEffect, useState } from "react";
-import { logout as logoutAuth } from "../../auth";
+import { logout as logoutAuth } from "../../store/auth";
 import { useRouter } from "next/router";
 import {CgProfile} from 'react-icons/cg'
 

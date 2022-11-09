@@ -1,7 +1,7 @@
 
 import { Auth } from "aws-amplify";
 import { login, logout as logoutAction } from "./reducer";
-import { persistor } from "../store";
+import { persistor } from "../index";
 
 async function getAuthUser(dispatch) {
     const user = await Auth.currentUserInfo();
@@ -12,8 +12,8 @@ async function getAuthUser(dispatch) {
 }
 
 async function logout(dispatch) {
-    dispatch(logoutAction())
-    Auth.signOut()
+    await dispatch(logoutAction())
+    await Auth.signOut()
     persistor.purge()
 }
 

@@ -4,10 +4,9 @@ import HeaderLayout from "./Header";
 import LayoutStyle from "./layout.module.css"
 import FooterNote from "./Footer/Note";
 import FooterMenu from "./Footer/Menu";
-import { getAuthUser } from "../auth";
 
 import { Inter } from '@next/font/google'
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 import { useRouter } from "next/router";
 

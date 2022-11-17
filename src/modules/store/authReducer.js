@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { combineReducers, createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     isLogin : false,
@@ -20,6 +20,24 @@ const {actions, reducer} = createSlice({
     }
 })
 
+
+const {actions : actionsForJWT , reducer : reducerForJWT} = createSlice({
+    name : 'jwt',
+    initialState: '',
+    reducers : {
+        setup : (state, action ) => {
+            console.log(action)
+            const {payload} =action
+            return payload
+        },
+        reset : (state, action) => {
+            return ''
+        }
+    }
+})
+
 export default reducer;
+export {reducerForJWT};
 
 export const {login, logout} = actions
+export const {setup, reset} = actionsForJWT

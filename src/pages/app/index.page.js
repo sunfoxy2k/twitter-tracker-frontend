@@ -21,13 +21,8 @@ const AddVictimForm = () => {
 
     function handleSubmit(event) {
         event.preventDefault();
-        console.log(event.target.value);
         addVictim(user);
     }
-
-    useEffect(() => {
-        console.log(data)
-    }, [isSuccess])
 
     return (
         <form className={AppStyle.form} onSubmit={handleSubmit}>
@@ -56,7 +51,7 @@ const App = () => {
         skip: !!!userName
     })
 
-    const refetchData = () => {
+    function refetchData ()  {
         refetch()
     }
 

@@ -6,11 +6,34 @@ import FooterNote from "./Footer/Note";
 import FooterMenu from "./Footer/Menu";
 
 import { Inter } from '@next/font/google'
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { useRouter } from "next/router";
+import { reset as resetJWT, setup as setJWT } from "../store/authReducer";
+import { Auth } from "aws-amplify";
 
 const inter = Inter({ subsets: ['latin'] })
+
+const SessionLogic = () => {
+  const isLogin = useSelector(state => state.auth.isLogin)
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    if (isLogin) {
+      Auth.currentSession()
+        .then(session => session.accessToken.jwtToken)
+        .then(jwt => dispatch(setJWT(jwt)))
+    } else {
+      dispatch(resetJWT())
+    }
+  }, [])
+
+  return (
+    <>
+
+    </>
+  )
+}
 
 const Layout = ({ children }) => {
   const router = useRouter()
@@ -18,13 +41,13 @@ const Layout = ({ children }) => {
   const isLogin = useSelector(state => state.auth.isLogin)
 
 
-  function checkNeedToLogin (path, isLogin)  {
+  function checkNeedToLogin(path, isLogin) {
     const isProtectedRoute = path.includes('/app')
 
-    return isProtectedRoute &&  !!!(isLogin)
+    return isProtectedRoute && !!!(isLogin)
   }
 
-  function checkNeedToApp (path, isLogin) {
+  function checkNeedToApp(path, isLogin) {
     const isLandingPage = path == '/' || path == ''
     return isLandingPage && isLogin
   }
@@ -41,14 +64,18 @@ const Layout = ({ children }) => {
   }, [path])
 
   return (
-    <div className={`${LayoutStyle.container} ${inter.className}`}>
-      <HeaderLayout className={LayoutStyle.header} />
-      <MainLayout className={LayoutStyle.main}>
-        {checkNeedToLogin(path, isLogin) ? "is Loading" : children}
-      </MainLayout>
-      <FooterNote className={LayoutStyle.footer__note} />
-      <FooterMenu className={LayoutStyle.footer__menu} />
-    </div>
+    <>
+      <SessionLogic />
+      <div className={`${LayoutStyle.container} ${inter.className}`}>
+        <HeaderLayout className={LayoutStyle.header} />
+        <MainLayout className={LayoutStyle.main}>
+          {checkNeedToLogin(path, isLogin) ? "is Loading" : children}
+        </MainLayout>
+        <FooterNote className={LayoutStyle.footer__note} />
+        <FooterMenu className={LayoutStyle.footer__menu} />
+      </div>
+
+    </>
   )
 }
 

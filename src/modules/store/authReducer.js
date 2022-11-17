@@ -26,7 +26,6 @@ const {actions : actionsForJWT , reducer : reducerForJWT} = createSlice({
     initialState: '',
     reducers : {
         setup : (state, action ) => {
-            console.log(action)
             const {payload} =action
             return payload
         },

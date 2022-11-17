@@ -26,7 +26,7 @@ const SessionLogic = () => {
     } else {
       dispatch(resetJWT())
     }
-  }, [])
+  }, [isLogin])
 
   return (
     <>

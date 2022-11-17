@@ -16,8 +16,9 @@ import { trackerAPI } from '../../pages/api';
 
 const persistConfig = {
   key: 'root',
-  // version: 1,
+  version: 1,
   storage,
+  blacklist : ['jwt']
 }
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)

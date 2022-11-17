@@ -13,8 +13,14 @@ export const trackerAPI = createApi({
     reducerPath,
     baseQuery: fetchBaseQuery({
         baseUrl: process.env.NEXT_PUBLIC_BASE_API_ENDPOINT,
-        prepareHeaders : (headers, {}) => {
-            
+        prepareHeaders : (headers, {getState}) => {
+            const jwt = getState().jwt
+
+            if (jwt) {
+              headers.set('authorization', jwt)
+            }
+        
+            return headers
         }
     }),
     endpoints: (builder) => ({

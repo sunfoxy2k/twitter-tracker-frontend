@@ -15,7 +15,7 @@ const LoginPage = () => {
     useEffect(() => {
         async function setUpAuthUser() {
             const user = await Auth.currentUserInfo();
-            if (user) {
+            if (user && user.username) {
                 const setUpAction = login(user.username);
                 dispatch(setUpAction);
                 router.back()

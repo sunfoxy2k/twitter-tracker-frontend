@@ -6,11 +6,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { openModal } from "../../UI_Component/Modal/slice";
 import Modal from "../../UI_Component/Modal";
 import React, { useRef, useEffect, useState } from "react";
-import { logout as logoutAction } from "../../store/authReducer";
+import { logout as logoutAction } from "../../../../../state/auth.reducer";
 import { useRouter } from "next/router";
 import { CgProfile } from 'react-icons/cg'
 import { Auth } from "aws-amplify";
-import {persistor} from '../../store'
+import {persistor} from '../../../../../state'
 
 const MenuItem = ({ href, content, className }) => {
     return (
@@ -32,8 +32,6 @@ const AuthHeader = (currentUser) => {
         persistor.purge()
         router.push('/')
     }
-
-
 
     return (
         <>

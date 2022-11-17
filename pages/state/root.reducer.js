@@ -1,8 +1,8 @@
 import {combineReducers} from "@reduxjs/toolkit";
 import UI_reducer from "../../modules/UI_Component/reducer";
-import { trackerAPI } from "../../pages/api";
-import auth, {reducerForJWT} from './authReducer'
-import {logout as logoutAction} from './authReducer'
+import { trackerAPI } from "../api";
+import auth, {reducerForJWT} from './auth.reducer'
+import {logout as logoutAction} from './auth.reducer'
 
 const appReducer = combineReducers({
     ui: UI_reducer,

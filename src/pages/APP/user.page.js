@@ -1,4 +1,4 @@
-import Widget from "../../modules/UI_Component/Widget"
+import Widget from "../../component/modules/UI_Component/Widget"
 
 const UserPage = () => {
     return (

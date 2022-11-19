@@ -1,11 +1,11 @@
 import React from "react";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
-import IndexPageStyle from './style/index.module.css'
+import style from './style/index-page.module.css'
 
 const HeroSection = () => {
     return (
-        <section className={IndexPageStyle.section__intro}>
+        <section className={style.section__intro}>
             <h1>Automatic Track New Following from Twitter Acount</h1>
         </section>
     )
@@ -17,7 +17,7 @@ const IndexPage = () => {
 
 
     return (
-        <div className={IndexPageStyle.container}>
+        <div className={style.container}>
             <HeroSection />
         </div>
     )

@@ -1,10 +1,10 @@
 import Link from "next/link";
 import HeaderStyle from './header.module.css'
-import { LogoLink } from "../../UI_Component/Logo";
+import { LogoLink } from "../../modules/UI_Component/Logo";
 import { IoMenu } from 'react-icons/io5'
 import { useDispatch, useSelector } from "react-redux";
-import { openModal } from "../../UI_Component/Modal/slice";
-import Modal from "../../UI_Component/Modal";
+import { openModal } from "../../modules/UI_Component/Modal/slice";
+import Modal from "../../modules/UI_Component/Modal";
 import React, { useRef, useEffect, useState } from "react";
 import { logout as logoutAction } from "../../../../../state/auth.reducer";
 import { useRouter } from "next/router";

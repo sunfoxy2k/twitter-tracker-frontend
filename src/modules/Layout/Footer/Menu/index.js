@@ -1,6 +1,6 @@
 import React, {useEffect, useRef, useState} from "react";
 import FooterStyle from "./footer.module.css"
-import {LogoLink} from '../../../UI_Component/Logo'
+import {LogoLink} from '../../../modules/UI_Component/Logo'
 import ExportedImage from "next-image-export-optimizer";
 import Link from "next/link";
 // import GridDotSVG from '../asset/dots.svg'

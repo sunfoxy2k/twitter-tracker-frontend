@@ -2,7 +2,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 
-const API_LIST_VICTIM = "`/list/victim/${id}`";
+const API_LIST_VICTIM = "`/list/victim`";
 const API_LIST_FOLLOWING = "`/list/following/${id}`";
 const API_VICTIM_ENDPOINT = "`/victim/${id}`";
 const API_USER_ENDPOINT = "`/user/${id}`";

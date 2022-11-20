@@ -6,6 +6,8 @@
     
     --padding-inline: var(--spacing-medium);
     --pading-vertical : var(--spacing-small);
+
+    --close-btn-size: calc(2 * var(--object-small));
 }
 
 .offset {
@@ -40,12 +42,42 @@
     gap: var(--spacing-small);
 }
 
-.right {
-}
-
 .logo img{
     width: var(--logo-width);
     height: auto;
+}
+
+.menu_list {
+    display: none;
+}
+
+.menu_bar {
+    display: block;
+}
+
+
+.menu_modal .menu_list {
+    display: block;
+}
+
+.menu_modal .menu_list ul {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-medium)
+}
+
+@media only screen and (min-width: 30em) {
+    .menu_list {
+        display: block;
+    }
+
+    .menu_bar {
+        display: none;
+    }
 }
 
 .menu_list ul{
@@ -64,13 +96,14 @@
     height: auto;
 }
 
+.close_button {
+    border-radius: 50%;
+    padding: var(--spacing-small);
 
-.menu_bar {
-    display: none;
+
+    width: var(--close-btn-size);
+    height: var(--close-btn-size);
 }
 
-@media only screen and (max-width: 30em) {
-    .menu_bar {
-        display: block;
-    }
+.close_button {
 }

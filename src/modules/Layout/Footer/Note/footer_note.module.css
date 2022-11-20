@@ -8,3 +8,9 @@
     text-align: center;
     padding: var(--spacing-small);
 }
+
+@media screen and (max-width: 40em) {
+    .container {
+        font-size: 0.7em;
+    }
+}

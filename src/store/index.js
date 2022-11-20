@@ -12,13 +12,13 @@ import {
 import storage from 'redux-persist/lib/storage'
 
 import rootReducer from './root.reducer'
-import { trackerAPI } from '../api';
+import { trackerAPI } from '@/api/index';
 
 const persistConfig = {
   key: 'root',
   version: 1,
   storage,
-  blacklist : ['jwt']
+  blacklist : ['jwt', 'ui']
 }
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)

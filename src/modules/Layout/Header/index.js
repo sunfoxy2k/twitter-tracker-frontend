@@ -1,16 +1,16 @@
 import Link from "next/link";
 import HeaderStyle from './header.module.css'
-import { LogoLink } from "../../modules/UI_Component/Logo";
+import { LogoLink } from "@/modules/UI_Component/Logo";
 import { IoMenu } from 'react-icons/io5'
 import { useDispatch, useSelector } from "react-redux";
-import { openModal } from "../../modules/UI_Component/Modal/slice";
-import Modal from "../../modules/UI_Component/Modal";
+import { openModal } from "@/modules/UI_Component/Modal/slice";
+import Modal from "@/modules/UI_Component/Modal";
 import React, { useRef, useEffect, useState } from "react";
-import { logout as logoutAction } from "../../../../../state/auth.reducer";
+import { logout as logoutAction } from "@/store/auth.reducer";
 import { useRouter } from "next/router";
 import { CgProfile } from 'react-icons/cg'
 import { Auth } from "aws-amplify";
-import {persistor} from '../../../../../state'
+import {persistor} from '@/store/index'
 
 const MenuItem = ({ href, content, className }) => {
     return (
@@ -43,6 +43,8 @@ const AuthHeader = (currentUser) => {
 
 
 const MenuList = () => {
+
+    
     const userName = useSelector(state => state.auth.userName)
 
     return (
@@ -60,10 +62,12 @@ const HeaderRight = () => {
     const MODAL_ID = 'MENU_NAV';
     const dispatch = useDispatch()
 
+    const isLogin = useSelector(state => state.auth.isLogin);
+
     return (
         <div className={HeaderStyle.right}>
-            <MenuList />
-            <IoMenu className={HeaderStyle.menu_bar} onClick={() => dispatch(openModal(MODAL_ID))} />
+            <MenuList  />
+            {isLogin ? <IoMenu className={HeaderStyle.menu_bar} onClick={() => dispatch(openModal(MODAL_ID))} /> : <MenuItem href='/app' content='Login' className={HeaderStyle.menu_bar} />}
             <Modal className={HeaderStyle.menu_modal} closeClassName={HeaderStyle.close_button} modal_id={MODAL_ID}>
                 <MenuList />
             </Modal>

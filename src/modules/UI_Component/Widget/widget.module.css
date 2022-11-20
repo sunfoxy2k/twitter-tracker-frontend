@@ -7,4 +7,14 @@
     background-color: var(--surface-color);
     color: var(--on-surface-color);
     border-radius: var(--spacing-large);
+    overflow: hidden;
+}
+
+@media only screen and (max-width : 32em) {
+    .container {
+        padding: var(--spacing-medium);
+        font-size: 0.8em;
+    }
+
+
 }

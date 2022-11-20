@@ -8,15 +8,15 @@ import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 
 
-import Layout from "./component/global/view/Layout";
-import store, { persistor } from "./store";
+import Layout from '@/modules/Layout'
+import store, { persistor } from "@/store/index";
 
 import { Amplify } from 'aws-amplify';
 import awsconfig from '../aws-exports';
 Amplify.configure(awsconfig);
 
 import RouteController from "./component/global/Route.controller";
-import JWTController from "./component/global/controller/JWT.controller";
+import JWTController from "./component/global/JWT.controller";
 
 const AppController = () => {
   return (

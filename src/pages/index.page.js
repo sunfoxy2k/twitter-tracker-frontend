@@ -12,9 +12,6 @@ const HeroSection = () => {
 }
 
 const IndexPage = () => {
-    const isLogin = useSelector(state => state.auth.isLogin)
-    const router = useRouter()
-
 
     return (
         <div className={style.container}>

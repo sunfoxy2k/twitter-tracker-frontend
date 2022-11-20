@@ -4,20 +4,21 @@ import Widget from "../Widget";
 import { closeModal as closeModalAction  } from "./slice";
 
 import ModalStyle from './modal.module.css';
+import { useRouter } from "next/router";
 
 const Modal = ({children, className, closeClassName, modal_id }) => {
     const dispatch = useDispatch()
     const displayModal = useSelector(state => state.ui.modal)
+    const router = useRouter()
+    
 
     const closeModal = () => {
         dispatch(closeModalAction()) 
     }
 
     useEffect(() => {
-        window.addEventListener('hashchange', closeModal)
-
-        return () => window.removeEventListener('hashchange', closeModal)
-    }, [])
+        dispatch(closeModalAction())
+    }, [router.asPath])
 
     return (
         <Widget className={`${ModalStyle.modal} ${displayModal == modal_id ? 'd-block' : null} ${className}`}>

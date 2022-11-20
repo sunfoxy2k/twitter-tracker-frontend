@@ -1,9 +1,9 @@
-import Loading from '../modules/UI_Component/Loading'
+import Loading from '@/modules/UI_Component/Loading'
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { Auth } from 'aws-amplify'
 import { withAuthenticator } from '@aws-amplify/ui-react'
-import { login } from './state/auth.reducer'
+import { login } from '@/store/auth.reducer'
 
 const LoginPage = () => {
     const dispatch = useDispatch()

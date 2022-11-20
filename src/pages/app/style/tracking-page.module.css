@@ -1,0 +1,28 @@
+.info {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-small);
+    font-size: var(--fs-md);
+}
+
+.info h3 {
+    margin: var(--spacing-small) 0;
+}
+
+.right {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-small);
+}
+
+.table {
+    margin: var(--spacing-medium) 0;
+}
+
+@media screen and (max-width: 32em) {
+    .form {
+        flex-direction: column;
+        text-align: center;
+    }
+}

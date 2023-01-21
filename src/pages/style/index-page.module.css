@@ -5,3 +5,7 @@
 .section__intro {
     text-align: center;
 }
+
+.button:disabled {
+    color: #666;
+}

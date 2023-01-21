@@ -15,7 +15,7 @@ const defaultProfile = {
 
 const TrackingPage = () => {
     const router = useRouter()
-    const { userName: twitterTrackingUser } = router.query
+    const { key: twitterTrackingUser } = router.query
     const currentUser = useSelector(state => state.auth.userName)
 
     const {
@@ -32,7 +32,7 @@ const TrackingPage = () => {
     } = useListFollowingQuery(twitterTrackingUser, { skip: !!!shouldQueryFollowing })
 
 
-    const { profileUrl, pictureProfileUrl } = shouldQueryFollowing ? twitterUserData.byId[twitterTrackingUser] : defaultProfile
+    const { profileUrl, pictureProfileUrl, userName } = shouldQueryFollowing ? twitterUserData.byId[twitterTrackingUser] : defaultProfile
 
     return (
         <div>
@@ -40,7 +40,7 @@ const TrackingPage = () => {
                 <div className={TrackingPageStyle.info}>
                     <h3>Current Following User : </h3>
                     <Avatar src={pictureProfileUrl}  />
-                    <a target="_blank" rel="noopener noreferrer" href={profileUrl}>{twitterTrackingUser}</a>
+                    <a target="_blank" rel="noopener noreferrer" href={profileUrl}>{userName}</a>
                     <Link href='/app' className={TrackingPageStyle.right} ><IoArrowBackCircle/> Back to List</Link>
                 </div>
                 {

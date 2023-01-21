@@ -7,8 +7,7 @@ export default function handler(req, res) {
     } else if (req.method === 'POST') {
         // change or add user meta data
         res.status(200).json({
-
-
+            appUsername: "test",
         })
     } else if (req.method === 'DELETE') {
         // DELETE USER 

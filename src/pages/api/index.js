@@ -2,11 +2,12 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 
-const API_LIST_VICTIM = "`/list/victim`";
+const API_LIST_VICTIM = "`/list/victims`";
 const API_LIST_FOLLOWING = "`/list/following/${id}`";
 const API_VICTIM_ENDPOINT = "`/victim/${id}`";
 const API_USER_ENDPOINT = "`/user/${id}`";
-
+const NEW_API_USER_ENDPOINT = "`/user`";
+const API_CREATE_SUBSCRIPTION_ENDPOINT = "`/subscription/create`";
 const reducerPath = 'api'
 
 export const trackerAPI = createApi({
@@ -28,7 +29,10 @@ export const trackerAPI = createApi({
             query: (id) => eval(API_LIST_VICTIM),
         }),
         listFollowing: builder.query({
-            query: (id) => eval(API_LIST_FOLLOWING)
+            query: (id) => {
+                id = encodeURIComponent(id)
+                return eval(API_LIST_FOLLOWING)
+            }
         }),
         addVictim: builder.mutation({
             query(id) {
@@ -40,9 +44,19 @@ export const trackerAPI = createApi({
         }),
         deleteVictim: builder.mutation({
             query(id) {
+                id = encodeURIComponent(id)
                 return {
                     url: eval(API_VICTIM_ENDPOINT),
                     method: 'DELETE'
+                }
+            }
+        }),
+        postUser: builder.mutation({
+            query(data) {
+                return {
+                    method: "POST",
+                    url: eval(NEW_API_USER_ENDPOINT),
+                    body: data
                 }
             }
         }),
@@ -67,8 +81,24 @@ export const trackerAPI = createApi({
                 }
             }
         }),
+        createSubscription: builder.mutation({
+            query(data) {
+                return {
+                    url: eval(API_CREATE_SUBSCRIPTION_ENDPOINT),
+                    method: "POST",
+                    body: data
+                }
+            }
+        }),
     })
 })
 
-export const { useListVictimQuery, useListFollowingQuery, useAddVictimMutation, useUpdateUserMutation, useDeleteVictimMutation
+export const { 
+    useListVictimQuery, 
+    useListFollowingQuery, 
+    useAddVictimMutation, 
+    useUpdateUserMutation, 
+    useDeleteVictimMutation,
+    useGetUserQuery,
+    usePostUserMutation,
 } = trackerAPI

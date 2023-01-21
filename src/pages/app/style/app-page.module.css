@@ -38,3 +38,7 @@
 .table {
     margin: var(--spacing-large) 0;
 }
+
+.button:disabled {
+    color: #666;
+}

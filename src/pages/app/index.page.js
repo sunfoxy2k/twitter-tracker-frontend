@@ -31,7 +31,7 @@ const AddVictimForm = () => {
                 <span>https://twitter.com/</span>
                 <input type="text" id="add-tracker" placeholder='elonmusk' name='victim' value={user} onChange={e => setUser(e.target.value)} />
             </span>
-            <button type="submit">Submit</button>
+            { isLoading ? <button className='button' type="submit" disabled>Adding...</button> :  <button type="submit">Submit</button>}
         </form>
 
     )

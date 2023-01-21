@@ -55,12 +55,13 @@ const BaseTable = ({ headers, rows, className }) => {
     )
 }
 
-const UntrackButton = ({ user_name }) => {
+const UntrackButton = ({ id, userName }) => {
     const [deleteVictim, apiResult] = useDeleteVictimMutation();
 
     const {
         data,
         isSuccess,
+        isLoading,
     } = apiResult
 
     useEffect(() => {
@@ -68,13 +69,19 @@ const UntrackButton = ({ user_name }) => {
     }, [isSuccess])
 
     const onClick = () => {
-        if (confirm(`Do you want to untrack user "${user_name}"`) == true) {
-            deleteVictim(user_name)
+        if (confirm(`Do you want to untrack user "${userName}"`) == true) {
+            deleteVictim(id)
         }
     }
 
     return (
-        <button className='button' onClick={onClick}>Untrack User</button>
+        // <button className='button' onClick={onClick}>Untrack User</button>
+        <>
+        { isLoading 
+            ? <button className='button' onClick={onClick}>Untrack User</button> 
+            : <button className='button' onClick={onClick}>Untrack User</button>
+        }
+        </>
     )
 }
 
@@ -83,11 +90,11 @@ const TrackingUserItem = ({ userName, pictureProfileUrl, totalFollowing, createT
     return (
         <tr>
             <td><Avatar src={pictureProfileUrl} /> </td>
-            <td> <Link href={`/app/tracking?userName=${id}`}>{userName}</Link></td>
+            <td> <Link href={`/app/tracking?key=${encodeURIComponent(id)}`}>{userName}</Link></td>
             <td>{totalFollowing}</td>
             <td className={style.hidden_mobile}>{formatDuration(createTime)}</td>
             <td className={style.hidden_mobile}> {formatDuration(updateTime)}</td>
-            <td><UntrackButton user_name={userName} /></td>
+            <td><UntrackButton id={id} userName={userName} /></td>
         </tr>
     )
 }

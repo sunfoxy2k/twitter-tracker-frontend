@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import "./style/subscription-page.module.css";
 import { useCreateSubscriptionMutation, useCancelSubscriptionMutation } from "../api";
 
-const UserSubscriptionInfo = ({ plan, start, end, refetch, isCancelled }) => {
+const UserSubscriptionInfo = ({ plan, start, end, refetch, isCancelled, isExpired }) => {
     const [cancelSubscription, resultCancelSubscription] = useCancelSubscriptionMutation();
     return (
         <div>
@@ -18,7 +18,7 @@ const UserSubscriptionInfo = ({ plan, start, end, refetch, isCancelled }) => {
                     <div />
                 : <button onClick={cancelSubscription}>Cancel Subscription</button>
             }
-            is
+            isExpired: {isExpired ? 'Yes' : 'No'}
         </div>
     )
 }

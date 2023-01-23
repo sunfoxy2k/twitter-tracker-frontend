@@ -12,7 +12,7 @@ export const TrackingTable = ({ data, className }) => {
         "",
         "Twitter User",
         "Number of Following",
-        "lastUpdateTime",
+        "Update Time",
         "addedTime",
         ""].map((e, idx) => <th className={(idx==3 ||idx == 4) && style.hidden_mobile } key={idx}>{e}</th>);
 
@@ -29,7 +29,7 @@ export const TrackingTable = ({ data, className }) => {
 }
 
 export const FollowingTable = ({ data, className }) => {
-    const headers = ["", "Twitter User", "lastUpdateTime"].map((e, idx) => <th key={idx}>{e}</th>)
+    const headers = ["", "Twitter User", "Update Time"].map((e, idx) => <th key={idx}>{e}</th>)
 
     const rowID = data.allIds
 

@@ -9,6 +9,7 @@ import React, { useRef, useEffect, useState } from "react";
 import { logout as logoutAction } from "@/store/auth.reducer";
 import { useRouter } from "next/router";
 import { CgProfile } from 'react-icons/cg'
+import { BiNews } from 'react-icons/bi'
 import { Auth } from "aws-amplify";
 import {persistor} from '@/store/index'
 
@@ -35,6 +36,7 @@ const AuthHeader = (currentUser) => {
 
     return (
         <>
+            <li><Link href="/app/subscription" className={HeaderStyle.profile}><BiNews /> Subscription</Link></li>
             <li><Link href="/app/user" className={HeaderStyle.profile}><CgProfile /> {currentUser}</Link></li>
             <li><button onClick={logout} className={`alter`}>Logout</button></li>
         </>

@@ -8,6 +8,7 @@ const API_VICTIM_ENDPOINT = "`/victim/${id}`";
 const API_USER_ENDPOINT = "`/user/${id}`";
 const NEW_API_USER_ENDPOINT = "`/user`";
 const API_CREATE_SUBSCRIPTION_ENDPOINT = "`/subscription/create`";
+const API_CANCEL_SUBSCRIPTION_ENDPOINT = "`/subscription/cancel`";
 const reducerPath = 'api'
 
 export const trackerAPI = createApi({
@@ -61,7 +62,7 @@ export const trackerAPI = createApi({
             }
         }),
         getUser: builder.query({
-            query: (id) => eval(API_USER_ENDPOINT)
+            query: (id) => eval(NEW_API_USER_ENDPOINT)
         }),
         deactivateUser: builder.mutation({
             query(id) {
@@ -90,6 +91,14 @@ export const trackerAPI = createApi({
                 }
             }
         }),
+        cancelSubscription: builder.mutation({
+            query(id) {
+                return {
+                    url: eval(API_CANCEL_SUBSCRIPTION_ENDPOINT),
+                    method: "POST"
+                }
+            }
+        })
     })
 })
 
@@ -101,4 +110,6 @@ export const {
     useDeleteVictimMutation,
     useGetUserQuery,
     usePostUserMutation,
+    useCreateSubscriptionMutation,
+    useCancelSubscriptionMutation,
 } = trackerAPI

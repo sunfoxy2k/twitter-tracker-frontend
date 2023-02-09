@@ -6,7 +6,7 @@ import { formatDuration } from './time';
 import { useDeleteVictimMutation } from '@/api/index';
 import { useEffect } from 'react';
 
-export const TrackingTable = ({ data, className }) => {
+export const TrackingTable = ({ data, className, refetchVictims }) => {
 
     const headers = [
         "",
@@ -21,14 +21,14 @@ export const TrackingTable = ({ data, className }) => {
 
     const rowsData = rowID.map(id => data.byId[id])
 
-    const rows = rowsData.map((prop, idx) => <TrackingUserItem  {...prop} key={idx} />)
+    const rows = rowsData.map((prop, idx) => <TrackingUserItem  {...prop} key={idx} refetchVictims={refetchVictims} />)
 
     return (
         <BaseTable headers={headers} rows={rows} className={className} />
     )
 }
 
-export const FollowingTable = ({ data, className }) => {
+export const FollowingTable = ({ data, className, refetchVictims }) => {
     const headers = ["", "Twitter User", "Update Time"].map((e, idx) => <th key={idx}>{e}</th>)
 
     const rowID = data.allIds
@@ -55,7 +55,7 @@ const BaseTable = ({ headers, rows, className }) => {
     )
 }
 
-const UntrackButton = ({ id, userName }) => {
+const UntrackButton = ({ id, userName, refetchVictims }) => {
     const [deleteVictim, apiResult] = useDeleteVictimMutation();
 
     const {
@@ -66,6 +66,9 @@ const UntrackButton = ({ id, userName }) => {
 
     useEffect(() => {
         console.log(data)
+        if (isSuccess) {
+            refetchVictims()
+        }
     }, [isSuccess])
 
     const onClick = () => {
@@ -78,14 +81,14 @@ const UntrackButton = ({ id, userName }) => {
         // <button className='button' onClick={onClick}>Untrack User</button>
         <>
         { isLoading 
-            ? <button className='button' onClick={onClick}>Untrack User</button> 
+            ? <button disabled className='button grey' onClick={onClick}>Procesing...</button> 
             : <button className='button' onClick={onClick}>Untrack User</button>
         }
         </>
     )
 }
 
-const TrackingUserItem = ({ userName, pictureProfileUrl, totalFollowing, createTime, updateTime, id }) => {
+const TrackingUserItem = ({ userName, pictureProfileUrl, totalFollowing, createTime, updateTime, id, refetchVictims }) => {
 
     return (
         <tr>
@@ -94,7 +97,7 @@ const TrackingUserItem = ({ userName, pictureProfileUrl, totalFollowing, createT
             <td>{totalFollowing}</td>
             <td className={style.hidden_mobile}>{formatDuration(createTime)}</td>
             <td className={style.hidden_mobile}> {formatDuration(updateTime)}</td>
-            <td><UntrackButton id={id} userName={userName} /></td>
+            <td><UntrackButton id={id} userName={userName} refetchVictims={refetchVictims} /></td>
         </tr>
     )
 }

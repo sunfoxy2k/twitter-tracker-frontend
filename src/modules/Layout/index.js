@@ -7,12 +7,15 @@ import FooterMenu from "./Footer/Menu";
 
 import { Inter } from '@next/font/google'
 
-const inter = Inter({ subsets: ['latin'] })
+// const inter = Inter({ subsets: ['latin'] })
 
 const Layout = ({ children }) => {
 
   return (
-      <div className={`${LayoutStyle.container} ${inter.className}`}>
+    // <div className={`${LayoutStyle.container} ${inter.className}`}> // disable due to fetch font error 
+
+      <div className={`${LayoutStyle.container}`}>
+        
         <HeaderLayout className={LayoutStyle.header} />
         <MainLayout className={LayoutStyle.main}>
           {children}

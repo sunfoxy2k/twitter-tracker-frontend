@@ -8,7 +8,7 @@ import { useAddVictimMutation } from '../api';
 import { useEffect, useState } from 'react';
 
 
-const AddVictimForm = () => {
+const AddVictimForm = ({ refetchVictims }) => {
     const [addVictim, result] = useAddVictimMutation('');
 
     const {
@@ -24,16 +24,25 @@ const AddVictimForm = () => {
         addVictim(user);
     }
 
+    useEffect(() => {
+        if (isSuccess) {
+            refetchVictims()
+        }
+    },
+        [isSuccess]
+    )
+
     return (
         <form className={AppStyle.form} onSubmit={handleSubmit}>
             <label htmlFor="add-tracker"><h3>Adding Twitter to track:</h3> </label>
             <span>
                 <span>https://twitter.com/</span>
-                <input type="text" id="add-tracker" placeholder='elonmusk' name='victim' value={user} onChange={e => setUser(e.target.value)} />
+                <input className='border-2' type="text" id="add-tracker" placeholder='elonmusk' name='victim' value={user} onChange={e => setUser(e.target.value)} />
             </span>
-            { isLoading ? <button className='button' type="submit" disabled>Adding...</button> :  <button type="submit">Submit</button>}
+            {isLoading ?
+                <button className='text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800' type="submit" disabled>Adding...</button>
+                : <button className='text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800' type="submit">Submit</button>}
         </form>
-
     )
 }
 
@@ -51,7 +60,7 @@ const App = () => {
         skip: !!!userName
     })
 
-    function refetchData ()  {
+    function refetchData() {
         refetch()
     }
 
@@ -60,11 +69,11 @@ const App = () => {
         <div>
             <Widget>
                 <div className={AppStyle.header}>
-                    <AddVictimForm />
+                    <AddVictimForm refetchVictims={refetch} />
                     <button onClick={refetchData} className="alter"> <IoReload /> </button>
                 </div>
                 {
-                    isLoading ? 'Is Loading' : isSuccess && data && <TrackingTable data={data} className={AppStyle.table} />
+                    isLoading ? 'Is Loading' : isSuccess && data && <TrackingTable data={data} className={AppStyle.table} refetchVictims={refetch} />
                 }
                 <div className={AppStyle.info}>
                     <h3>Current Number Tracking:</h3>

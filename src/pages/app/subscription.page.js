@@ -2,51 +2,11 @@ import Widget from "@/modules/UI_Component/Widget"
 import { useGetUserQuery } from "../api"
 import { useSelector } from 'react-redux';
 import "./style/subscription-page.module.css";
-import { useCreateSubscriptionMutation, useCancelSubscriptionMutation } from "../api";
 
-const UserSubscriptionInfo = ({ plan, start, end, refetch, isCancelled, isExpired }) => {
-    const [cancelSubscription, resultCancelSubscription] = useCancelSubscriptionMutation();
-    return (
-        <div>
-            <h3>Current Subscription</h3>
-            <p>{plan}</p>
-            <p>{start}</p>
-            <p>{end}</p>
-            <p>Is Cancelled: {isCancelled ? 'Yes' : 'No'}</p>
-            {
-                isCancelled ?
-                    <div />
-                : <button onClick={cancelSubscription}>Cancel Subscription</button>
-            }
-            isExpired: {isExpired ? 'Yes' : 'No'}
-        </div>
-    )
-}
-
-const SubscriptionInfoCard = ({ name, price, duration, description, maxTracker }) => {
-    const [createSubscription, resultCreateSubscription] = useCreateSubscriptionMutation();
-
-
-    function createPaymentSession() {
-        createSubscription({
-            plan: name
-        })
-    }
-
-    if (resultCreateSubscription.isSuccess) {
-        window.location.href = resultCreateSubscription.data.url
-    }
-
-    return (
-        <button onClick={createPaymentSession}>
-            <h3>{name}</h3>
-            <p>{price}</p>
-            <p>{duration}</p>
-            <p>{description}</p>
-            <p>{maxTracker}</p>
-        </button>
-    )
-}
+import SubscriptionInfoCard from './component/Subscription/SubscriptionInfoCard';
+import AppStyle from './style/app-page.module.css'
+import { IoReload } from 'react-icons/io5';
+import UserSubscriptionInfo from './component/Subscription/UserSubscriptionInfo';
 
 const SubscriptionPlans = () => {
     const subscriptionInfos = {
@@ -67,15 +27,19 @@ const SubscriptionPlans = () => {
     }
     return (
         <div>
-            <h3>Subscription Plans</h3>
-            <SubscriptionInfoCard {...subscriptionInfos.standard}/>
-            <SubscriptionInfoCard {...subscriptionInfos.premium}/>
+            <h1 className='text-center mb-32 text-4xl text-gray-900'>Subscription Plans</h1>
+            <div className='grid grid-cols-4 gap-4'>
+                <div />
+                <SubscriptionInfoCard {...subscriptionInfos.standard} />
+                <SubscriptionInfoCard {...subscriptionInfos.premium} />
+                <div />
+            </div>
         </div>
     )
 }
 
 const SubscriptionPage = () => {
-    const userName = useSelector(state => state.auth.userName)
+    // const userName = useSelector(state => state.auth.userName)
 
     const {
         data,
@@ -85,22 +49,27 @@ const SubscriptionPage = () => {
         error,
         refetch,
     } = useGetUserQuery()
-
+    console.log({isSuccess, data})
     const currentSubscription = {
         plan: data?.subscriptionPlan,
         start: data?.subscriptionStartTime,
         end: data?.subscriptionEndTime,
         isCancelled: data?.isCancelled,
     }
-    currentSubscription.isExpired = currentSubscription.end ? new Date(currentSubscription.end) < new Date() : false
-
+    currentSubscription.isExpired = currentSubscription.end && (currentSubscription.end < Date.now()) ? false : true
+    function refetchData() {
+        refetch()
+    }
     return (
         <div>
             <Widget>
+                <div className={AppStyle.header}>
+                    <button onClick={refetchData} className="alter"> <IoReload /> </button>
+                </div>
                 {
-                    currentSubscription.start
-                        ? <UserSubscriptionInfo {...currentSubscription} refetch={refetch} />
-                        : <SubscriptionPlans />
+                    currentSubscription.isExpired
+                        ? <SubscriptionPlans />
+                        : <UserSubscriptionInfo {...currentSubscription} refetch={refetch} />
                 }
             </Widget>
         </div>

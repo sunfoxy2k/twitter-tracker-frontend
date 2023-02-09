@@ -9,6 +9,7 @@ const API_USER_ENDPOINT = "`/user/${id}`";
 const NEW_API_USER_ENDPOINT = "`/user`";
 const API_CREATE_SUBSCRIPTION_ENDPOINT = "`/subscription/create`";
 const API_CANCEL_SUBSCRIPTION_ENDPOINT = "`/subscription/cancel`";
+const API_PUT_TELEGRAM_CHAT_ID = "`/telegram/chat_id`";
 const reducerPath = 'api'
 
 export const trackerAPI = createApi({
@@ -82,6 +83,15 @@ export const trackerAPI = createApi({
                 }
             }
         }),
+        putTelegramChatId: builder.mutation({
+            query(data) {
+                return {
+                    url: eval(API_PUT_TELEGRAM_CHAT_ID),
+                    method: "PUT",
+                    body: data
+                }
+            }
+        }),
         createSubscription: builder.mutation({
             query(data) {
                 return {
@@ -112,4 +122,5 @@ export const {
     usePostUserMutation,
     useCreateSubscriptionMutation,
     useCancelSubscriptionMutation,
+    usePutTelegramChatIdMutation,
 } = trackerAPI

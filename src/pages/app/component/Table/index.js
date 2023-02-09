@@ -65,7 +65,6 @@ const UntrackButton = ({ id, userName, refetchVictims }) => {
     } = apiResult
 
     useEffect(() => {
-        console.log(data)
         if (isSuccess) {
             refetchVictims()
         }

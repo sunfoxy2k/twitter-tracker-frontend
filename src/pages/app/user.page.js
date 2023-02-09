@@ -14,11 +14,11 @@ const UserPage = () => {
         error,
         refetch,
     } = useGetUserQuery()
-    console.log({ isSuccess, data })
+    console.log({ isSuccess, data, isError, error })
 
     useEffect(() => {
         if (isSuccess) {
-            setTelegramChatId(data.telegramChatId)
+            setTelegramChatId(data?.telegramChatId || '')
         }
     }, [isSuccess])
 
@@ -41,8 +41,8 @@ const UserPage = () => {
 
                 <h1 className="h1 text-center font-bold">User Info</h1>
                 <div>
-                    <h2 className="mb-2">Username: <b>{data.appUsername}</b></h2>
-                    <h2 className="mb-3">Email: <b>{data.appEmail}</b></h2>
+                    <h2 className="mb-2">Username: <b>{data?.appUsername|| ''}</b></h2>
+                    <h2 className="mb-3">Email: <b>{data?.appEmail || ''}</b></h2>
                     <div>
                         <img src="https://i.imgur.com/f1Bx8Ax.png" alt="Telegram Bot QR Code" />
                         <h2>Telegram Account:

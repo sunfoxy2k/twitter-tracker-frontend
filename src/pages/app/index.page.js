@@ -15,7 +15,11 @@ const AddVictimForm = ({ refetchVictims }) => {
         data,
         isLoading,
         isSuccess,
+        isError,
+        error,
     } = result
+
+    console.log({ isSuccess, data, isError, error })
 
     const [user, setUser] = useState('')
 
@@ -31,6 +35,14 @@ const AddVictimForm = ({ refetchVictims }) => {
     },
         [isSuccess]
     )
+
+    useEffect(() => {
+      if (isError) {
+        alert(`Error: ${error.data.message || 'Something went wrong'}`)
+      }
+  },
+      [isError]
+  )
 
     return (
         <form className={AppStyle.form} onSubmit={handleSubmit}>

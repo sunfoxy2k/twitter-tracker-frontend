@@ -10,17 +10,24 @@ import UserSubscriptionInfo from './component/Subscription/UserSubscriptionInfo'
 
 const SubscriptionPlans = () => {
     const subscriptionInfos = {
+        free: {
+            name: 'Free',
+            price: 0,
+            duration: 'forever',
+            description: 'Free plan',
+            maxTracker: 2,
+        },
         standard: {
             name: 'Standard',
             price: 10,
-            duration: '1 month',
+            duration: 'month',
             description: 'Standard plan',
             maxTracker: 20,
         },
         premium: {
             name: 'Premium',
             price: 20,
-            duration: '1 month',
+            duration: 'month',
             description: 'Premium plan',
             maxTracker: 50,
         }
@@ -28,11 +35,12 @@ const SubscriptionPlans = () => {
     return (
         <div>
             <h1 className='text-center mb-32 text-4xl text-gray-900'>Subscription Plans</h1>
-            <div className='grid grid-cols-4 gap-4'>
-                <div />
+            <div className='grid grid-cols-3 gap-4'>
+                {/* <div /> */}
+                <SubscriptionInfoCard {...subscriptionInfos.free} />
                 <SubscriptionInfoCard {...subscriptionInfos.standard} />
                 <SubscriptionInfoCard {...subscriptionInfos.premium} />
-                <div />
+                {/* <div /> */}
             </div>
         </div>
     )
@@ -49,7 +57,7 @@ const SubscriptionPage = () => {
         error,
         refetch,
     } = useGetUserQuery()
-    console.log({isSuccess, data})
+    console.log({ isSuccess, data, isError, error })
     const currentSubscription = {
         plan: data?.subscriptionPlan,
         start: data?.subscriptionStartTime,
